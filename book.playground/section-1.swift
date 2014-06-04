@@ -98,10 +98,121 @@ for (kind, numbers) in interestingNumbers {
 largest
 knd
 
+var n = 2
+while n < 100 {
+    n = n * 2
+}
+
+n
+
+var m = 2
+do {
+    m = m * 2
+} while m < 100
+
+m
+
+var firstForLoop = 0
+for i in 0...3 {
+    firstForLoop += i
+}
+firstForLoop
+
+var secondForLoop = 0
+for var i = 0; i < 3; ++i {
+    secondForLoop += 1
+}
+secondForLoop
+
+func greet(name: String, day: String) -> String {
+    return "Hello \(name), today is \(day)."
+}
+
+greet("Bob", "Tuesday")
+
+func getGasPrices() -> (Double, Double, Double) {
+    return (3.56, 4.22, 3.65);
+}
+
+getGasPrices()
+
+func sumOf(numbers: Int...) -> Int {
+    var sum = 0
+    for number in numbers {
+        sum += number
+    }
+    
+    return sum
+}
+
+sumOf()
+sumOf(42, 55, 100)
+
+/*
+func avgOf(nums: Int...) -> Double {
+    let sum = sumOf(nums)
+    let cnt = nums.count
+    
+    return sum / cnt
+}
+*/
+
+func returnFifteen() -> Int {
+    var y = 10
+    func add() {
+        y += 5
+    }
+    
+    add()
+    return y
+}
+
+returnFifteen()
+
+
+func makeIncrementer() -> (Int -> Int) {
+    func addOne(number: Int) -> Int {
+        return 1 + number
+    }
+    return addOne
+}
+
+var increment = makeIncrementer()
+increment(7)
+
+func hasAnyMatches(list: Int[], condition: Int -> Bool) -> Bool {
+    for item in list {
+        if condition(item) {
+            return true
+        }
+    }
+    
+    return false
+}
+
+func lessThanTen(number: Int) -> Bool {
+    return number < 10
+}
+
+var numbers = [20, 19, 7, 12]
+hasAnyMatches(numbers, lessThanTen)
 
 
 
+numbers.map({
+    (number: Int) -> Int in
+    let result = 3 * number
+    return result
+    })
 
+numbers.map({
+    (number: Int) -> Int in
+    return number % 2 == 0 ? 3 * number : 0
+})
+
+numbers.map({ number in 3 * number })
+
+sort([1, 5, 3, 12, 2]) { $0 > $1 }
 
 
 
