@@ -214,6 +214,216 @@ numbers.map({ number in 3 * number })
 
 sort([1, 5, 3, 12, 2]) { $0 > $1 }
 
+class Shape {
+    var numberOfSides = 0
+    let name = ""
+    
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+    
+    func greetShape(person: String) -> String {
+        return "Hi \(person)."
+    }
+}
+
+let triangle = Shape()
+triangle.numberOfSides = 7
+let desc = triangle.simpleDescription()
+triangle.greetShape("Bill")
+
+class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+}
+
+class Square : NamedShape {
+    var sideLength: Double
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+    
+    override func simpleDescription() -> String {
+        return "A square with sides of length \(sideLength)."
+    }
+}
+
+let test = Square(sideLength: 5.2, name: "my test square")
+test.area()
+test.simpleDescription()
+
+class Circle : NamedShape {
+    var radius: Double
+    
+    init(radius: Double, name: String) {
+        self.radius = radius
+        super.init(name: name)
+        numberOfSides = 0
+    }
+    
+    func area() -> Double {
+        return 3.14 * radius * radius
+    }
+    
+    func describe() -> String {
+        return "A circle with radius \(radius)."
+    }
+}
+
+let circle = Circle(radius: 12.0, name: "Bill")
+circle.area()
+circle.describe()
+
+class EquilateralTriangle : NamedShape {
+    var sideLength: Double = 0.0
+    
+    init (sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 3
+    }
+    
+    var perimeter: Double {
+        get { return 3.0 * sideLength }
+        set { sideLength = newValue / 3.0 }
+    }
+    
+    override func simpleDescription() -> String {
+        return "An equilateral triangle with sides of length \(sideLength)."
+    }
+}
+
+let eqTriangle = EquilateralTriangle(sideLength: 2.0, name: "Bill")
+eqTriangle.perimeter
+eqTriangle.perimeter = 9.9
+eqTriangle.sideLength
+
+
+
+class TriangleAndSquare {
+    var triangle: EquilateralTriangle {
+    willSet { square.sideLength = newValue.sideLength }
+    }
+    
+    var square: Square {
+    willSet { triangle.sideLength = newValue.sideLength }
+    }
+    
+    init(size: Double, name: String) {
+        square = Square(sideLength: size, name: name)
+        triangle = EquilateralTriangle(sideLength: size, name: name)
+    }
+}
+
+let triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
+triangleAndSquare.square.sideLength
+triangleAndSquare.triangle.sideLength
+triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
+triangleAndSquare.triangle.sideLength
+
+
+class Counter {
+    var count: Int = 0
+    func incrementBy(amount: Int, numberOfTimes times: Int) {
+        count += amount * times
+    }
+}
+
+var counter = Counter()
+counter.incrementBy(2, numberOfTimes: 7)
+
+let optionalSquare: Square? = Square(sideLength: 2.4, name: "optional square")
+let sideLength = optionalSquare?.sideLength
+
+enum Rank: Int {
+    case Ace = 1
+    case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+    case Jack, Queen, King
+    func simpleDescription() -> String {
+        switch self {
+        case .Ace: return "ace"
+        case .Jack: return "jack"
+        case .Queen: return "queen"
+        case .King: return "king"
+        default: return String(self.toRaw())
+        }
+    }
+    
+    func compare(rank: Rank) -> Int {
+        if (self.toRaw() > rank.toRaw()) {
+            return 1;
+        }
+        else if (self.toRaw() < rank.toRaw()) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
+}
+
+let ace = Rank.Ace
+let aceRawValue = ace.toRaw()
+
+ace.compare(Rank.Queen)
+
+if let convertedRank = Rank.fromRaw(3) {
+    let threeDescription = convertedRank.simpleDescription()
+}
+
+enum Suit {
+    case Spades, Hearts, Diamonds, Clubs
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .Spades : return "spades"
+        case .Hearts : return "hearts"
+        case .Diamonds : return "diamonds"
+        case .Clubs : return "clubs"
+        }
+    }
+    
+    func color() -> String {
+        switch self {
+        case .Spades : return "black"
+        case .Clubs: return "black"
+        default: return "red"
+        }
+    }
+}
+
+let hearts = Suit.Hearts
+let heartsDescription = hearts.simpleDescription()
+
+hearts.color()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
