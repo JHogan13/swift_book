@@ -386,8 +386,9 @@ if let convertedRank = Rank.fromRaw(3) {
     let threeDescription = convertedRank.simpleDescription()
 }
 
-enum Suit {
-    case Spades, Hearts, Diamonds, Clubs
+enum Suit: Int {
+    case Spades = 1
+    case Hearts, Diamonds, Clubs
     
     func simpleDescription() -> String {
         switch self {
@@ -411,6 +412,38 @@ let hearts = Suit.Hearts
 let heartsDescription = hearts.simpleDescription()
 
 hearts.color()
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+    
+    static func makeDeck() -> Card[] {
+        var deck = Card[]()
+        
+        for s in 1...4 {
+            for r in 1...13 {
+                if let theSuit = Suit.fromRaw(s) {
+                    if let theRank = Rank.fromRaw(r) {
+                        deck.append(Card(rank: theRank, suit: theSuit))
+                    }
+                }
+            }
+        }
+        
+        return deck
+    }
+}
+
+let threeOfSpades = Card(rank: .Three, suit: .Spades)
+let threeOfSpadesDesc = threeOfSpades.simpleDescription()
+
+let theDeck = Card.makeDeck()
+
+
 
 
 
