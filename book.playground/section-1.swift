@@ -524,6 +524,75 @@ hunter.simpleDescription
 let protocolValue: ExampleProtocol = a
 protocolValue.simpleDescription
 
+func repeat<ItemType>(item: ItemType, times: Int) -> ItemType[] {
+    var result = ItemType[]()
+    for i in 0..times {
+        result += item
+    }
+    
+    return result
+}
+
+repeat("knock", 4)
+
+repeat(4, 10)
+
+// Reimplement the Swift standard library's optional type
+enum OptionalValue<T> {
+    case None
+    case Some(T)
+}
+
+var possibleInteger: OptionalValue<Int> = .None
+possibleInteger = .Some(100)
+
+
+func anyCommonElements <T, U where
+    T: Sequence,
+    U: Sequence,
+    T.GeneratorType.Element: Equatable,
+    T.GeneratorType.Element == U.GeneratorType.Element>
+    (lhs: T, rhs: U) -> Bool {
+        for lhsItem in lhs {
+            for rhsItem in rhs {
+                if lhsItem == rhsItem {
+                    return true
+                }
+            }
+        }
+        
+        return false
+}
+
+func commonElements <T, U where
+    T: Sequence,
+    U: Sequence,
+    T.GeneratorType.Element: Equatable,
+    T.GeneratorType.Element == U.GeneratorType.Element>
+    (lhs: T, rhs: U) -> Array<T.GeneratorType.Element>  {
+        
+        var result = Array<T.GeneratorType.Element>()
+        for lhsItem in lhs {
+            for rhsItem in rhs {
+                if lhsItem == rhsItem {
+                    result.append(lhsItem)
+                }
+            }
+        }
+        
+        return result
+}
+
+anyCommonElements([1, 2, 3], [3])
+commonElements([1,2,3], [3,4,1])
+
+
+
+
+
+
+
+
 
 
 
