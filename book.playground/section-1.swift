@@ -444,6 +444,100 @@ let threeOfSpadesDesc = threeOfSpades.simpleDescription()
 let theDeck = Card.makeDeck()
 
 
+enum ServerResponse {
+    case Result(String, String)
+    case Error(String)
+    case Exception(String)
+}
+
+let success = ServerResponse.Result("6:00am", "8:09pm")
+let failure = ServerResponse.Error("Out of cheese.")
+let exc = ServerResponse.Exception("WTF DID YOU DO")
+
+switch success {
+case let .Result(sunrise, sunset):
+    let serverResponse = "Sunrise is at \(sunrise) and sunset is at \(sunset)."
+case let .Error(error):
+    let serverResponse = "Failure... \(error)"
+case let .Exception(ex):
+    let serverResponse = "Exception thrown - \(ex)"
+}
+
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+}
+
+class SimpleClass: ExampleProtocol {
+    var simpleDescription: String = "A very simple class."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += "  Now 100% adjusted."
+    }
+}
+
+var a = SimpleClass()
+a.simpleDescription
+a.adjust()
+let aDesc = a.simpleDescription
+
+var barb = SimpleClass()
+let barbDesc = barb.simpleDescription
+barb.adjust()
+
+barbDesc
+
+let bill = SimpleClass()
+bill.adjust()
+
+bill
+
+struct SimpleStructure: ExampleProtocol {
+    var simpleDescription: String = "A simple structure"
+    mutating func adjust() {
+        simpleDescription += " (adjusted)"
+    }
+}
+
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription
+
+let max : ExampleProtocol = b
+
+max.simpleDescription
+
+extension Int: ExampleProtocol {
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+
+7.simpleDescription
+let hunter = 13
+// hunter.adjust() Why doesn't this work??
+hunter.simpleDescription
+
+let protocolValue: ExampleProtocol = a
+protocolValue.simpleDescription
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
