@@ -694,6 +694,98 @@ println("The status code is \(http200Status.statusCode)")
 println("The status message is \(http200Status.description)")
 
 
+// Optionals
+
+let possibleNumber = "123"
+let convertedNumber = possibleNumber.toInt()
+
+if convertedNumber {
+    println("\(possibleNumber) has an integer value of \(convertedNumber!)")
+} else {
+    println("\(possibleNumber) could not be converted to an integer")
+}
+
+// Optional Binding
+
+if let actualNumber = possibleNumber.toInt() {
+    println("\(possibleNumber) has an integer value of \(actualNumber)")
+} else {
+    println("\(possibleNumber) could not be converted to an integer")
+}
+
+// nil
+
+var serverResponseCode: Int? = 404
+serverResponseCode = nil
+
+// Implicitly Unwrapped Optionals
+
+let possibleString: String? = "An optional string."
+println(possibleString!) // requires !
+
+let assumedString: String! = "An implicitly unwrapped optional string."
+println(assumedString)
+
+
+// Assertions
+
+let age = -3
+assert(age >= 0, "A person's age cannot be less than 0")
+
+// Collection Types
+
+// Arrays
+
+var shoppingList_ = ["Eggs", "Milk"]
+shoppingList_ += "Baking powder"
+shoppingList_ += ["Chocolate Spread", "Cheese", "Butter"]
+
+var firstItem = shoppingList_[0]
+
+shoppingList_[0] = "Six eggs"
+shoppingList_[4...6] = ["Bananas", "Apples"]
+
+shoppingList_.insert("Maple Syzrp", atIndex:0)
+
+let mapleSyrup = shoppingList_.removeAtIndex(0)
+
+firstItem = shoppingList_[0] // Closed gap
+
+let apples_ = shoppingList_.removeLast()
+
+for item in shoppingList_ {
+    println(item)
+}
+
+for (index, value) in enumerate(shoppingList_) {
+    println("Item \(index + 1): \(value)")
+}
+
+var someInts = Int[]()
+println("someInts is of type Int[] with \(someInts.count) items.")
+
+someInts.append(3)
+
+someInts = []
+
+var threeDoubles = Double[](count: 3, repeatedValue:0.0)
+
+var anotherThreeDoubles = Array(count: 3, repeatedValue:2.5)
+
+var sixDoubles = threeDoubles + anotherThreeDoubles
+
+// Dictionaries
+
+
+
+
+
+
+
+
+
+
+
 
 
 
